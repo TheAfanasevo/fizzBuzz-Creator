@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Cermati Coding Session</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="head">
+      <h1>FizzBuzz Generator</h1>
+      <p>Input a number in range 1-100 and see the magic!</p>
+      <form action="">
+        <input type="text" name="fbinput" id="fbinput"> <input type="button" value="Generate">
+      </form><br>
+      <p>Reload the page to enter a new number. <code>[Ctrl + R]</code></p>
+    </div>
+    <div class="output">
+      <!-- Content will be added here with JavaScript -->
+    </div>
+  </div>
+  <!-- Script -->
+  <script>
+    let fbInput = document.querySelector('#fbinput');
+    let outputArea = document.querySelector('.output');
+    let generateBtn = document.querySelector('input[type="button"]');
+
+    /* Input */
+    fbInput.addEventListener('input', function() {
+      console.log(fbInput.value);
+    });
+
+    /* Button Event */
+    generateBtn.addEventListener('click', function() {
+      if(fbInput.value <= 0 || fbInput.value > 100) {
+        let warn = document.createElement('DIV');
+        warn.classList.add('warning');
+        warn.innerText = 'Invalid input';
+        
+        /* Remove all divs */
+        let numbers = document.querySelectorAll('.num');
+        numbers.forEach(n => n.remove());
+        
+        /* Display warning */
+        outputArea.appendChild(warn); 
+        
+          /* Warning fades away */
+          if(outputArea.hasChildNodes()) {
+              setTimeout(() => {
+              outputArea.removeChild(warn);
+            }, 1000);
+            return;
+          }    
+
+        return;
+      }
+      /* Else */
+      let input = parseInt(fbInput.value);
+      console.log(input);
+      
+      for(let i = 1; i<=input; i++) {
+        console.log(i);
+        let div = document.createElement('DIV');
+        let num = document.createElement('DIV');
+        div.classList.add('num');
+               
+        if(i%15 === 0) {
+          console.log('fizzBuzz');
+          div.classList.add('fizzBuzz');
+          outputArea.appendChild(div).appendChild(num).innerText = 'fizzBuzz';
+        } else if(i%3 === 0) {
+          console.log('fizz');
+          div.classList.add('fizz');
+          outputArea.appendChild(div).appendChild(num).innerText = 'fizz';
+        } else if(i%5 === 0) {
+          div.classList.add('Buzz');
+          console.log('buzz');
+          outputArea.appendChild(div).appendChild(num).innerText = 'Buzz';
+        } else {
+          outputArea.appendChild(div).appendChild(num).innerText = `${i}`;
+        }
+      };
+    });
+
+
+    let limit = 100;
+
+console.log('test');
+  </script>
+</body>
+</html>
